@@ -1,16 +1,16 @@
 package com.rlourenco.enumerator;
 
-public enum ResponsibleEnum {
-	RICARDO("Ricardo"),
-	JOAO("João"),
-	MARIA("Maria");
+public enum SituationEnum {
+
+	IN_PROGRESS("Em Andamento"),
+	COMPLETED("Concluída");
 	
 	private String description;
-
-	private ResponsibleEnum(String description) {
+	
+	SituationEnum(String description){
 		this.description = description;
 	}
-
+	
 	public String getDescription() {
 		return description;
 	}
