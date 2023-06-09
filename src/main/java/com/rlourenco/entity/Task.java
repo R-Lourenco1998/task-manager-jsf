@@ -29,22 +29,23 @@ public class Task implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column(name = "title", nullable = false, length = 120)
 	private String title;
 	
+	@Column(name = "description", nullable = false, length = 120)
 	private String description;
-	
 	
 	@Column(name = "priority_level")
     @Enumerated(EnumType.STRING)
     private PriorityLevelEnum priority;
     
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
     private Date deadline;
     
     @Column(name = "responsible")
     @Enumerated(EnumType.STRING)
     private ResponsibleEnum responsible;
-
+    
 	public Long getId() {
 		return id;
 	}
@@ -114,6 +115,20 @@ public class Task implements Serializable {
 	public String toString() {
 		return "Task [id=" + id + "]";
 	}
-    
+
+	public Task(Long id, String title, String description, PriorityLevelEnum priority, Date deadline,
+			ResponsibleEnum responsible) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.priority = priority;
+		this.deadline = deadline;
+		this.responsible = responsible;
+	}
+
+	public Task() {
+		super();
+	}
     
 }

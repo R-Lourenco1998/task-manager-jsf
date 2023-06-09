@@ -28,3 +28,10 @@
 *.iws
 target/classes/com/rlourenco/entity/Task.class
 *.class
+.classpath
+.settings/org.eclipse.wst.common.component
+.settings/org.eclipse.wst.common.project.facet.core.prefs.xml
+.settings/org.eclipse.wst.common.project.facet.core.xml
+target/m2e-wtp/web-resources/META-INF/maven/com.rlourenco/task-manager-jsf/pom.xml
+target/m2e-wtp/web-resources/META-INF/maven/com.rlourenco/task-manager-jsf/pom.properties
+target/classes/com/rlourenco/entity/Task.class
