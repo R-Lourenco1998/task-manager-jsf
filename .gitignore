@@ -1,0 +1,30 @@
+# Arquivos de configuração
+.classpath
+.project
+.settings/
+
+# Arquivos compilados
+/target/
+
+# Logs e arquivos gerados
+/log/
+*.log
+
+# Cache e arquivos temporários
+/cache/
+*.tmp
+
+# Arquivos de build
+/build/
+/dist/
+
+# Dependências gerenciadas pelo Maven
+/lib/
+
+# IDE specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+target/classes/com/rlourenco/entity/Task.class
+*.class
