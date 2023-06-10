@@ -2,6 +2,8 @@ package com.rlourenco.repository;
 
 import java.io.Serializable;
 import java.util.List;
+
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -15,6 +17,7 @@ public class TaskRepository implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
 	private EntityManager entityManager;
 
 	public TaskRepository(EntityManager entityManager) {
