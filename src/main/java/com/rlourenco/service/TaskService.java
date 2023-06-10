@@ -1,4 +1,4 @@
-package service;
+package com.rlourenco.service;
 
 import java.io.Serializable;
 
@@ -6,8 +6,7 @@ import javax.inject.Inject;
 
 import com.rlourenco.entity.Task;
 import com.rlourenco.repository.TaskRepository;
-
-import util.Transactional;
+import com.rlourenco.util.Transactional;
 
 public class TaskService implements Serializable {
 

@@ -1,4 +1,4 @@
-package util;
+package com.rlourenco.util;
 
 import java.io.Serializable;
 import javax.inject.Inject;

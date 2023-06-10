@@ -1,4 +1,4 @@
-package util;
+package com.rlourenco.util;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;

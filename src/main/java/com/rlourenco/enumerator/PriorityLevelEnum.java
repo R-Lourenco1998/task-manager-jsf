@@ -1,13 +1,13 @@
 package com.rlourenco.enumerator;
 
 public enum PriorityLevelEnum {
-	HIGH("Urgente"),
+	HIGH("Alta"),
 	MEDIUM("Média"),
 	LOW("Baixa");
 	
 	private String description;
 
-	private PriorityLevelEnum(String description) {
+	PriorityLevelEnum(String description) {
 		this.description = description;
 	}
 

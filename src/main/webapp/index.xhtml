@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="UTF-8" name="viewport"
+		content="width=device-width, initial-scale=1.0" />
+	<title>Gerenciador de Tarefas</title>
+	<h:outputStylesheet library="css" name="style.css" />
+</h:head>
+<h:body>
+
+	<header>
+		<h:graphicImage library="css" name="logo.png" style="width: 30px;" />
+	</header>
+	<div id="conteudo">
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Título: " for="title" />
+				<h:inputText id="title" value="#{taskBean.task.title}" />
+
+				<h:outputLabel value="Descrição: " for="description" />
+				<h:inputText id="description" value="#{taskBean.task.description}" />
+
+				<h:outputLabel value="Prioridade: " for="priority" />
+				<h:selectOneMenu id="priority" value="#{taskBean.task.priority}"
+					immediate="true">
+					<f:selectItem itemLabel="Selecione..." />
+					<f:selectItems value="#{taskBean.priorityLevels}"
+						var="priorityLevel" itemValue="#{priorityLevel}"
+						itemLabel="#{priorityLevel.description}" />
+				</h:selectOneMenu>
+				<h:outputLabel />
+				<h:outputLabel value="Responsável: " for="responsible" />
+				<h:selectOneMenu id="responsible"
+					value="#{taskBean.task.responsible}" immediate="true">
+					<f:selectItem itemLabel="Selecione..." />
+					<f:selectItems value="#{taskBean.responsibles}" var="responsible"
+						itemValue="#{responsible}" itemLabel="#{responsible.description}" />
+				</h:selectOneMenu>
+				<h:outputLabel />
+				<h:commandButton value="Salvar" actionListener="#{taskBean.save}" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+
+
+	<footer> Teste técnico ESIG Group. </footer>
+</h:body>
+</html>

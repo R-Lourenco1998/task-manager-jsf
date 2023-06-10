@@ -7,7 +7,7 @@ public enum ResponsibleEnum {
 	
 	private String description;
 
-	private ResponsibleEnum(String description) {
+	ResponsibleEnum(String description) {
 		this.description = description;
 	}
 
