@@ -30,12 +30,12 @@
 
 					</div>
 					<div class="panel-input-column">
-						<p:inputNumber placeholder="Número" id="input-number-filter" />
+						<p:inputNumber placeholder="Número" id="input-number-filter" value="#{taskBean.idFilter}" />
 						<p:inputText maxlength="25" id="input-title-filter"
 							placeholder="Título/Descrição" value="#{taskBean.titleDescriptionFilter}" />
 						<div class="panel-input-column-row">
 							<div>
-								<p:selectOneMenu id="responsibleFilter">
+								<p:selectOneMenu id="responsibleFilter" value="#{taskBean.responsibleFilter}" >
 									<f:selectItem itemLabel="Selecione" itemValue=""
 										noSelectionOption="true" />
 									<f:selectItems value="#{taskBean.responsibles}"
@@ -46,7 +46,7 @@
 							</div>
 							<div>
 								<h:outputLabel value="Situação: " />
-								<p:selectOneMenu id="situationFilter">
+								<p:selectOneMenu id="situationFilter" value="#{taskBean.situationFilter}">
 									<f:selectItem itemLabel="Selecione" itemValue=""
 										noSelectionOption="true" />
 									<f:selectItems value="#{taskBean.situations}"
@@ -57,7 +57,7 @@
 							</div>
 							<div>
 								<h:outputLabel value="Prioridade: " />
-								<p:selectOneMenu id="priorityFilter">
+								<p:selectOneMenu id="priorityFilter" value="#{taskBean.priorityFilter}">
 									<f:selectItem itemLabel="Selecione" itemValue=""
 										noSelectionOption="true" />
 									<f:selectItems value="#{taskBean.priorityLevels}"

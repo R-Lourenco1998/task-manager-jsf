@@ -28,6 +28,12 @@ public class TaskBean implements Serializable {
 	private Long idFilter;
 
 	private String titleDescriptionFilter;
+	
+	private PriorityLevelEnum priorityFilter;
+	
+	private ResponsibleEnum responsibleFilter;
+	
+	private SituationEnum situationFilter;
 
 	public void save() {
 		System.out.println("Título: " + task.getTitle() + "Descrição: " + task.getDescription() + "Prioridade: "
@@ -35,7 +41,7 @@ public class TaskBean implements Serializable {
 	}
 
 	public void search() {
-		tasksList = taskService.searchTasks(titleDescriptionFilter);
+		tasksList = taskService.searchTasks(titleDescriptionFilter, idFilter, priorityFilter, responsibleFilter, situationFilter);
 	}
 
 	public Task getTask() {
@@ -77,5 +83,31 @@ public class TaskBean implements Serializable {
 	public void setTitleDescriptionFilter(String titleDescriptionFilter) {
 		this.titleDescriptionFilter = titleDescriptionFilter;
 	}
+
+	public PriorityLevelEnum getPriorityFilter() {
+		return priorityFilter;
+	}
+
+	public void setPriorityFilter(PriorityLevelEnum priorityFilter) {
+		this.priorityFilter = priorityFilter;
+	}
+
+	public ResponsibleEnum getResponsibleFilter() {
+		return responsibleFilter;
+	}
+
+	public void setResponsibleFilter(ResponsibleEnum responsibleFilter) {
+		this.responsibleFilter = responsibleFilter;
+	}
+
+	public SituationEnum getSituationFilter() {
+		return situationFilter;
+	}
+
+	public void setSituationFilter(SituationEnum situationFilter) {
+		this.situationFilter = situationFilter;
+	}
+	
+	
 
 }

@@ -6,6 +6,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import com.rlourenco.entity.Task;
+import com.rlourenco.enumerator.PriorityLevelEnum;
+import com.rlourenco.enumerator.ResponsibleEnum;
+import com.rlourenco.enumerator.SituationEnum;
 import com.rlourenco.repository.TaskRepository;
 import com.rlourenco.util.Transactional;
 
@@ -32,8 +35,8 @@ public class TaskService implements Serializable {
 	}
 
 	@Transactional
-	public List<Task> searchTasks(String search) {
-		return repository.searchWithCriteria(search);
+	public List<Task> searchTasks(String search, Long idFilter, PriorityLevelEnum priorityFilter, ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
+		return repository.searchWithCriteria(search,idFilter, priorityFilter, responsibleFilter, situationFilter);
 	}
 
 }
