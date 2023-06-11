@@ -32,7 +32,7 @@
 					<div class="panel-input-column">
 						<p:inputNumber placeholder="Número" id="input-number-filter" />
 						<p:inputText maxlength="25" id="input-title-filter"
-							placeholder="Título" />
+							placeholder="Título/Descrição" value="#{taskBean.titleDescriptionFilter}" />
 						<div class="panel-input-column-row">
 							<div>
 								<p:selectOneMenu id="responsibleFilter">
@@ -67,20 +67,21 @@
 								</p:selectOneMenu>
 							</div>
 							<div>
-								<p:commandButton type="submit" value="Buscar Tarefas"
+								<p:commandButton type="submit" update="tasksDataTable" actionListener="#{taskBean.search}" value="Buscar Tarefas"
 									icon="ui-icon-check" />
 							</div>
 						</div>
 					</div>
 				</div>
 				<p:dataTable id="tasksDataTable" value="#{taskBean.tasksList}"
-					var="task" stripedRows="true" paginator="true" rows="2"
+					var="task" stripedRows="true" paginator="true" rows="10"
 					paginatorPosition="bottom"
 					emptyMessage="Nenhum registro encontrado">
 					<p:column style="width: 15px;" headerText="Número">
 						<h:outputText value="#{task.id}" />
 					</p:column>
-					<p:column style="width: 88px;" headerText="Título">
+					<p:column sortBy="#{task.title}" style="width: 88px;"
+						headerText="Título">
 						<h:outputText value="#{task.title}" />
 					</p:column>
 					<p:column headerText="Descrição">
@@ -118,6 +119,53 @@
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
+
+				<p:dialog modal="true" resizable="false" closeOnEscape="true"
+					draggable="false" header="Cadastrar Tarefa"
+					widgetVar="taskDialogWidgetVar">
+					<h:panelGrid columns="2">
+						<p:outputLabel value="Título: " for="title" />
+						<p:inputText class="title" id="title"
+							value="#{taskBean.task.title}" />
+
+						<p:outputLabel value="Descrição: " for="description" />
+						<p:inputTextarea counter="displayCount" maxlength="50" cols="60"
+							counterTemplate="{0} Caracteres restantes." id="description"
+							rows="1" autoResize="true" value="#{taskBean.task.description}" />
+						<div style="display: flex; flex-direction: row;">
+							<h:outputText id="displayCount" class="block" />
+						</div>
+					</h:panelGrid>
+					<h:panelGrid columns="4">
+						<p:outputLabel value="Prioridade: " for="priority" />
+						<p:selectOneMenu id="priority" value="#{taskBean.task.priority}">
+							<f:selectItem itemLabel="Selecione..." />
+							<f:selectItems value="#{taskBean.priorityLevels}"
+								var="priorityLevel" itemLabel="#{priorityLevel.description}"
+								itemValue="#{priorityLevel}" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Responsável: " for="responsible" />
+						<p:selectOneMenu id="responsible"
+							value="#{taskBean.task.responsible}">
+							<f:selectItem itemLabel="Selecione..." />
+							<f:selectItems value="#{taskBean.responsibles}" var="responsible"
+								itemValue="#{responsible}"
+								itemLabel="#{responsible.description}" />
+						</p:selectOneMenu>
+					</h:panelGrid>
+
+					<h:panelGrid rendered="#{taskBean.task ne null}">
+						<h:outputLabel for="deadLine" value="Deadline: " />
+						<p:calendar id="deadLine"
+							showTime="true" value="#{taskBean.task.deadline}" />
+					</h:panelGrid>
+					
+				</p:dialog>
+				<div>
+					<p:commandButton class="create-task-btn" type="submit"
+						value="Adicionar Tarefa" icon="ui-icon-check"
+						oncomplete="PF('taskDialogWidgetVar').show()" />
+				</div>
 			</h:form>
 		</p:panel>
 	</div>

@@ -25,9 +25,17 @@ public class TaskBean implements Serializable {
 
 	private Task task = new Task();
 
+	private Long idFilter;
+
+	private String titleDescriptionFilter;
+
 	public void save() {
 		System.out.println("Título: " + task.getTitle() + "Descrição: " + task.getDescription() + "Prioridade: "
 				+ task.getPriority() + "Deadline: " + task.getDeadline() + "Responsável: " + task.getResponsible());
+	}
+
+	public void search() {
+		tasksList = taskService.searchTasks(titleDescriptionFilter);
 	}
 
 	public Task getTask() {
@@ -53,4 +61,21 @@ public class TaskBean implements Serializable {
 	public SituationEnum[] getSituations() {
 		return SituationEnum.values();
 	}
+
+	public Long getIdFilter() {
+		return idFilter;
+	}
+
+	public void setIdFilter(Long idFilter) {
+		this.idFilter = idFilter;
+	}
+
+	public String getTitleDescriptionFilter() {
+		return titleDescriptionFilter;
+	}
+
+	public void setTitleDescriptionFilter(String titleDescriptionFilter) {
+		this.titleDescriptionFilter = titleDescriptionFilter;
+	}
+
 }

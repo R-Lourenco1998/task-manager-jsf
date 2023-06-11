@@ -30,4 +30,10 @@ public class TaskService implements Serializable {
 	public List<Task> getAllTasks() {
 		return repository.findAll();
 	}
+
+	@Transactional
+	public List<Task> searchTasks(String search) {
+		return repository.searchWithCriteria(search);
+	}
+
 }

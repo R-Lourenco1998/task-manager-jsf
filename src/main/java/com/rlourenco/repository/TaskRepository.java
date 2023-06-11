@@ -44,16 +44,18 @@ public class TaskRepository implements Serializable {
 	    Root<Task> root = criteriaQuery.from(Task.class);
 	    criteriaQuery.select(root);
 
-	    // Criação do predicado composto
+	    String searchLower = search.toLowerCase();
+
 	    Predicate predicate = criteriaBuilder.or(
-	        criteriaBuilder.like(root.get("title"), "%" + search + "%"),
-	        criteriaBuilder.like(root.get("description"), "%" + search + "%")
+	        criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchLower + "%"),
+	        criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchLower + "%")
 	    );
 	    criteriaQuery.where(predicate);
 
 	    TypedQuery<Task> query = entityManager.createQuery(criteriaQuery);
 	    return query.getResultList();
 	}
+
 
 
 	public List<Task> findAll() {
