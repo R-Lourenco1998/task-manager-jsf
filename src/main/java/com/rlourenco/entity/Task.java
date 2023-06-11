@@ -50,7 +50,7 @@ public class Task implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private PriorityLevelEnum priority;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date deadline;
 
 	@Column(name = "responsible")
