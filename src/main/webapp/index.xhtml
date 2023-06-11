@@ -8,46 +8,118 @@
 		content="width=device-width, initial-scale=1.0" />
 	<title>Gerenciador de Tarefas</title>
 	<h:outputStylesheet library="css" name="style.css" />
+
+	<f:metadata>
+		<f:viewAction action="#{taskBean.AllTasks}"></f:viewAction>
+	</f:metadata>
 </h:head>
 <h:body>
 
-	<header>
+	<header class="header">
 		<h:graphicImage library="css" name="logo.png" style="width: 30px;" />
 	</header>
-	<div id="conteudo">
-		<h:form>
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Título: " for="title" />
-				<p:inputText id="title" value="#{taskBean.task.title}" />
+	<div class="body">
+		<p:panel class="panel" header="Listagem de Tarefas">
+			<h:form id="form">
+				<p:growl id="messages" />
+				<div class="panel-body">
+					<div class="panel-label-column">
+						<h:outputLabel value="Número: " />
+						<h:outputLabel value="Título/Descrição: " />
+						<h:outputLabel value="Responsável: " />
 
-				<p:outputLabel value="Descrição: " for="description" />
-				<p:inputText id="description" value="#{taskBean.task.description}" />
+					</div>
+					<div class="panel-input-column">
+						<p:inputNumber placeholder="Número" id="input-number-filter" />
+						<p:inputText maxlength="25" id="input-title-filter"
+							placeholder="Título" />
+						<div class="panel-input-column-row">
+							<div>
+								<p:selectOneMenu id="responsibleFilter">
+									<f:selectItem itemLabel="Selecione" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{taskBean.responsibles}"
+										var="taskResponsibleEnum"
+										itemLabel="#{taskResponsibleEnum.description}"
+										itemValue="#{taskResponsibleEnum}" />
+								</p:selectOneMenu>
+							</div>
+							<div>
+								<h:outputLabel value="Situação: " />
+								<p:selectOneMenu id="situationFilter">
+									<f:selectItem itemLabel="Selecione" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{taskBean.situations}"
+										var="taskSituationEnum"
+										itemLabel="#{taskSituationEnum.description}"
+										itemValue="#{taskSituationEnum}" />
+								</p:selectOneMenu>
+							</div>
+							<div>
+								<h:outputLabel value="Prioridade: " />
+								<p:selectOneMenu id="priorityFilter">
+									<f:selectItem itemLabel="Selecione" itemValue=""
+										noSelectionOption="true" />
+									<f:selectItems value="#{taskBean.priorityLevels}"
+										var="taskPriorityLevelEnum"
+										itemLabel="#{taskPriorityLevelEnum.description}"
+										itemValue="#{taskPriorityLevelEnum}" />
+								</p:selectOneMenu>
+							</div>
+							<div>
+								<p:commandButton type="submit" value="Buscar Tarefas"
+									icon="ui-icon-check" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<p:dataTable id="tasksDataTable" value="#{taskBean.tasksList}"
+					var="task" stripedRows="true" paginator="true" rows="2"
+					paginatorPosition="bottom"
+					emptyMessage="Nenhum registro encontrado">
+					<p:column style="width: 15px;" headerText="Número">
+						<h:outputText value="#{task.id}" />
+					</p:column>
+					<p:column style="width: 88px;" headerText="Título">
+						<h:outputText value="#{task.title}" />
+					</p:column>
+					<p:column headerText="Descrição">
+						<h:outputText value="#{task.description}" />
+					</p:column>
+					<p:column style="width: 45px;" headerText="Responsável">
+						<h:outputText value="#{task.responsible.description}" />
+					</p:column>
+					<p:column style="width: 45px;" headerText="Prioridade">
+						<h:outputText value="#{task.priority.description}" />
+					</p:column>
 
-				<p:outputLabel value="Prioridade: " for="priority" />
-				<p:selectOneMenu id="priority" value="#{taskBean.task.priority}">
-					<f:selectItem itemLabel="Selecione..." />
-					<f:selectItems value="#{taskBean.priorityLevels}"
-						var="priorityLevel" itemLabel="#{priorityLevel.description}"
-						itemValue="#{priorityLevel}" />
-				</p:selectOneMenu>
-				<p:outputLabel value="Responsável: " for="responsible" />
-				<p:selectOneMenu id="responsible"
-					value="#{taskBean.task.responsible}">
-					<f:selectItem itemLabel="Selecione..." />
-					<f:selectItems value="#{taskBean.responsibles}" var="responsible"
-						itemValue="#{responsible}" itemLabel="#{responsible.description}" />
-				</p:selectOneMenu>
+					<p:column style="width: 45px;" headerText="Situação">
+						<h:outputText value="#{task.situation.description}" />
+					</p:column>
+					<p:column style="width: 42px;" headerText="Deadline">
+						<h:outputText value="#{task.deadline}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+					<p:column style="width: 60px;" headerText="Ações"
+						exportable="false">
+						<p:commandButton icon="pi pi-pencil"
+							styleClass="edit-button rounded-button ui-button-secondary"
+							process="@this">
+							<p:resetInput target=":dialogs:edit-task-content" />
+						</p:commandButton>
+						<p:commandButton class="ui-button-danger rounded-button"
+							icon="pi pi-trash" process="@this">
 
-				<h:panelGroup>
-					<p:outputLabel value="Deadline: " for="deadline" />
-					<p:inputText label="Deadline" id="deadline" value="#{taskBean.task.deadline}">
-						<f:convertDateTime> pattern="dd/MM/yyyy"</f:convertDateTime>
-					</p:inputText>
-					<h:message for="deadline" />
-				</h:panelGroup>
-			</h:panelGrid>
-			<p:commandButton value="Salvar" update="@form" actionListener="#{taskBean.save}" />
-		</h:form>
+						</p:commandButton>
+						<p:commandButton class="ui-button-success rounded-button"
+							icon="pi pi-check-circle" process="@this">
+
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</p:panel>
 	</div>
 
 

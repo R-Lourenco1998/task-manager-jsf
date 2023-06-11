@@ -1,6 +1,7 @@
 package com.rlourenco.service;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,5 +24,10 @@ public class TaskService implements Serializable {
 	@Transactional
 	public void delete(Task task) {
 		repository.delete(task);
+	}
+
+	@Transactional
+	public List<Task> getAllTasks() {
+		return repository.findAll();
 	}
 }

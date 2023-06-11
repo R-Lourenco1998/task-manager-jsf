@@ -1,40 +1,163 @@
-@charset "utf-8";
+@charset "UTF-8";
+/*################Components configurations################*/
 
-body {
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-	margin: 0px;
-	font-weight: normal
+/*Apply to all labels*/
+label {
+	padding: 10px;
 }
 
-header {
-	padding: 5px;
-	margin-bottom: 20px;
-	height: 30px;
-	background-color: #545454;
-	color: #fff;
-	box-shadow: 0px 2px 2px #ccc
+/*Apply to all table heads*/
+th, td {
+	text-align: center !important;
+	width: 121px;
 }
 
-#conteudo {
-	padding: 0px 8px
+.ui-tag{
+	font-size: 1.4rem !important;	
+	width: 40vw;
+	min-width: 300px;
+	min-height: 40px;
 }
 
-footer {
-	border-top: 1px solid #ccc;
-	padding: 5px 8px;
+/*Apply to all combobox*/
+.ui-selectonemenu, .hasDatepicker {
+	width: 175px !important;
+	height: 37px !important
+}
+
+/*Apply to all buttons*/
+body .ui-button {
+	padding-right: 0.8rem !important;
+}
+
+body .ui-button.rounded-button.ui-button-icon-only{
+	margin: 5px !important;
+	}
+
+/*Apply to panel content*/
+.ui-panel-content {
+	height: 650px;
+}
+
+.ui-datatable{
+	margin-top: 25px;
+	height: 377px;
+}
+
+/* ################Main page content configurations################*/
+.header {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 80px;
+	max-height: 90px;
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	height: 85vh;
+}
+
+/* ################General panel configurations################ */
+.panel {
+	width: 70vw;
+	min-width: 380px;
+}
+
+.panel .panel-body {
+	display: flex;
+	flex-direction: row;
+}
+
+.panel-body .panel-label-column {
+	display: flex;
+	height: 18vh;
+	flex-direction: column;
+	width: 12%;
+	text-align: right;
+	justify-content: space-between;
+}
+
+.panel-body .panel-input-column {
+	display: flex;
+	flex-direction: column;
+	height: 18vh;
+	width: 80%;
+	justify-content: space-between;
+}
+
+.panel-input-column #input-number-filter {
+	width: 25%;
+	height: 41px;
+}
+
+.panel-input-column #input-title-filter {
+	height: 41px;
+}
+
+.panel-input-column .panel-input-column-row {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: space-between;
+}
+
+/*################Table configuration################*/
+.table {
+	margin-top: 35px;
+}
+
+.table .th-number, .th-title {
+	width: 150px;
+}
+
+.create-task-btn {
+	float: right;
+}
+
+/*MODAL CONFIGURATIONS*/
+/* ################# Panel configurations #################*/
+.panel {
+	width: 70vw;
+	min-width: 380px;
+}
+
+.panel .panel-row-title, .panel-row-deadline {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 40px;
+	width: 100%;
+}
+
+.panel-title-label, .panel-description-label{
+	width: 150px;
+	text-align: right;
+	margin-top: 6px;
+}
+
+.panel-input-title{
+	margin-left: 20px;
+}
+
+.title{
+	width: 476px !important;
+}
+
+.ui-panel-content{
+	padding: 30px !important;
+}
+
+.input-title, .input-textarea-description{
+	width: 55vw;
+}
+
+.btn-cadastrar{
+	display: flex;
+	justify-content: center;
 	margin-top: 20px;
-	margin-bottom: 10px
-}
-
-.img{
-	width: 30px
-}
-
-h1 {
-	font-size: 24px;
-	font-weight: 500;
-	padding: 0px;
-	margin: 0px;
-	margin-bottom: 10px
 }
