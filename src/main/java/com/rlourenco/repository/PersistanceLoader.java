@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 import com.rlourenco.entity.Task;
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
+import com.rlourenco.enumerator.SituationEnum;
 
 public class PersistanceLoader {
 
@@ -38,6 +39,7 @@ public class PersistanceLoader {
 		// task1.setDeadline(deadline);
 		task1.setResponsible(ResponsibleEnum.RICARDO);
 		task1.setPriority(PriorityLevelEnum.HIGH);
+		task1.setSituation(SituationEnum.IN_PROGRESS);
 
 		taskRepository.save(task1);
 

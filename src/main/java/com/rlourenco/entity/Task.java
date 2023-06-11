@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
+import com.rlourenco.enumerator.SituationEnum;
 
 @Entity
 @Table(name = "task")
@@ -56,6 +57,10 @@ public class Task implements Serializable {
 	@Column(name = "responsible")
 	@Enumerated(EnumType.STRING)
 	private ResponsibleEnum responsible;
+	
+	@Column(name = "situation")
+	@Enumerated(EnumType.STRING)
+	private SituationEnum situation;
 
 	public Long getId() {
 		return id;
@@ -103,6 +108,15 @@ public class Task implements Serializable {
 
 	public void setResponsible(ResponsibleEnum responsible) {
 		this.responsible = responsible;
+	}
+
+	
+	public SituationEnum getSituation() {
+		return situation;
+	}
+
+	public void setSituation(SituationEnum situation) {
+		this.situation = situation;
 	}
 
 	@Override
