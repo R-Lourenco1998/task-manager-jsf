@@ -1,11 +1,15 @@
 package com.rlourenco.controller;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.context.RequestContext;
+
 import com.rlourenco.entity.Task;
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
@@ -58,8 +62,9 @@ public class TaskBean implements Serializable {
 		if (wasResearch()) {
 			search();
 		}
-		messages.info("Tarefa cadastrada com sucesso!");
+		messages.info("Tarefa salva com sucesso!");
 		getAllTasks();
+		RequestContext.getCurrentInstance().update(Arrays.asList("form:tasksDataTable", "form:messages"));
 	}
 
 	public Task getTask() {

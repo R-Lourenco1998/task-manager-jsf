@@ -72,14 +72,15 @@
 								</p:selectOneMenu>
 							</div>
 							<div>
-								<p:commandButton type="submit" update="tasksDataTable"
+								<p:commandButton type="submit"
+									update="tasksDataTable messagesTable"
 									actionListener="#{taskBean.search}" value="Buscar Tarefas"
 									icon="ui-icon-check" />
 							</div>
 						</div>
 					</div>
 				</div>
-				<p:messages autoUpdate="true" />
+				<p:messages id="messagesTable" />
 				<p:dataTable id="tasksDataTable" value="#{taskBean.tasksList}"
 					var="task" stripedRows="true" paginator="true" rows="5"
 					paginatorPosition="bottom"
@@ -135,6 +136,7 @@
 				<p:dialog id="createTaskDialog" modal="true" resizable="false"
 					closeOnEscape="true" draggable="false" header="Cadastrar Tarefa"
 					widgetVar="taskDialogWidgetVar">
+					<p:messages id="taskMessages" />
 					<h:panelGrid id="taskPanelGrid" columns="2"
 						rendered="#{taskBean.task ne null}">
 						<p:outputLabel value="Título: " for="title" />
@@ -160,22 +162,22 @@
 								itemValue="#{responsible}"
 								itemLabel="#{responsible.description}" />
 						</p:selectOneMenu>
-						<h:outputLabel for="deadline" value="Deadline: " />
+						<p:outputLabel value="Deadline: " for="deadline" />
 						<p:calendar pattern="dd/MM/yyyy" size="30" id="deadline"
 							showTime="false" value="#{taskBean.task.deadline}" />
 						<h:outputLabel />
-						<p:commandButton value="Salvar"
-							oncomplete="PF('taskDialogWidgetVar').hide()"
-							actionListener="#{taskBean.save}"
-							update="tasksDataTable taskPanelGrid" process="createTaskDialog" />
+						<p:commandButton value="Salvar" actionListener="#{taskBean.save}"
+							update="taskPanelGrid taskMessages"
+							oncomplete="if (!args.validationFailed) PF('taskDialogWidgetVar').hide()"
+							process="createTaskDialog" />
 					</h:panelGrid>
 				</p:dialog>
 				<div>
 					<p:commandButton class="create-task-btn" type="submit"
-						value="Adicionar Tarefa" icon="ui-icon-check" process="@this"
+						value="Adicionar Tarefa" icon="ui-icon-check"
 						update="createTaskDialog"
 						oncomplete="PF('taskDialogWidgetVar').show()"
-						actionListener="#{taskBean.prepareNewTask}" />
+						actionListener="#{taskBean.prepareNewTask}" process="@this" />
 				</div>
 			</h:form>
 		</p:panel>

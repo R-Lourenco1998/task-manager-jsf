@@ -14,6 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
@@ -35,29 +38,36 @@ public class Task implements Serializable {
 		this.responsible = responsible;
 	}
 
-	public Task() {}
+	public Task() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@NotEmpty
 	@Column(name = "title", nullable = false, length = 120)
 	private String title;
 
+	@NotEmpty
 	@Column(name = "description", nullable = false, length = 120)
 	private String description;
 
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	private Date deadline;
+
+	@NotNull
 	@Column(name = "priority_level")
 	@Enumerated(EnumType.STRING)
 	private PriorityLevelEnum priority;
 
-	@Temporal(TemporalType.DATE)
-	private Date deadline;
-
+	@NotNull
 	@Column(name = "responsible")
 	@Enumerated(EnumType.STRING)
 	private ResponsibleEnum responsible;
-	
+
+	@NotNull
 	@Column(name = "situation")
 	@Enumerated(EnumType.STRING)
 	private SituationEnum situation;
@@ -110,7 +120,6 @@ public class Task implements Serializable {
 		this.responsible = responsible;
 	}
 
-	
 	public SituationEnum getSituation() {
 		return situation;
 	}
