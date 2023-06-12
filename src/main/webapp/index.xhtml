@@ -177,7 +177,10 @@
 						value="Adicionar Tarefa" icon="ui-icon-check"
 						update="createTaskDialog"
 						oncomplete="PF('taskDialogWidgetVar').show()"
-						actionListener="#{taskBean.prepareNewTask}" process="@this" />
+						actionListener="#{taskBean.prepareNewTask}" process="@this">
+						
+						<p:resetInput target="createTaskDialog"/>
+					</p:commandButton>
 				</div>
 			</h:form>
 		</p:panel>
