@@ -10,7 +10,7 @@ import javax.persistence.EntityTransaction;
 
 @Interceptor
 @Transactional
-public class TransacionalInterceptor implements Serializable {
+public class TransactionalInterceptor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

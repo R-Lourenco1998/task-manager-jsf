@@ -35,8 +35,9 @@ public class TaskService implements Serializable {
 	}
 
 	@Transactional
-	public List<Task> searchTasks(String search, Long idFilter, PriorityLevelEnum priorityFilter, ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
-		return repository.searchWithCriteria(search,idFilter, priorityFilter, responsibleFilter, situationFilter);
+	public List<Task> searchTasks(String search, Long idFilter, PriorityLevelEnum priorityFilter,
+			ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
+		return repository.searchWithCriteria(search, idFilter, priorityFilter, responsibleFilter, situationFilter);
 	}
 
 }

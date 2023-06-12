@@ -41,43 +41,41 @@ public class TaskRepository implements Serializable {
 		return query.getResultList();
 	}
 
-	public List<Task> searchWithCriteria(String search, Long idFilter, PriorityLevelEnum priorityFilter, ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
-	    CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-	    CriteriaQuery<Task> criteriaQuery = criteriaBuilder.createQuery(Task.class);
-	    Root<Task> root = criteriaQuery.from(Task.class);
-	    criteriaQuery.select(root);
+	public List<Task> searchWithCriteria(String search, Long idFilter, PriorityLevelEnum priorityFilter,
+			ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Task> criteriaQuery = criteriaBuilder.createQuery(Task.class);
+		Root<Task> root = criteriaQuery.from(Task.class);
+		criteriaQuery.select(root);
 
-	    String searchLower = search.toLowerCase();
+		String searchLower = search.toLowerCase();
 
-	    Predicate predicate = criteriaBuilder.or(
-	        criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchLower + "%"),
-	        criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchLower + "%")
-	    );
-	    
+		Predicate predicate = criteriaBuilder.or(
+				criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchLower + "%"),
+				criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchLower + "%"));
 
-	    if (priorityFilter != null) {
-	        predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("priority"), priorityFilter));
-	    }
+		if (priorityFilter != null) {
+			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("priority"), priorityFilter));
+		}
 
-	    if (responsibleFilter != null) {
-	        predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("responsible"), responsibleFilter));
-	    }
+		if (responsibleFilter != null) {
+			predicate = criteriaBuilder.and(predicate,
+					criteriaBuilder.equal(root.get("responsible"), responsibleFilter));
+		}
 
-	    if (situationFilter != null) {
-	        predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("situation"), situationFilter));
-	    }
-	    
-	    if (idFilter != null) {
-	        predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("id"), idFilter));
-	    }
+		if (situationFilter != null) {
+			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("situation"), situationFilter));
+		}
 
-	    criteriaQuery.where(predicate);
+		if (idFilter != null) {
+			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("id"), idFilter));
+		}
 
-	    TypedQuery<Task> query = entityManager.createQuery(criteriaQuery);
-	    return query.getResultList();
+		criteriaQuery.where(predicate);
+
+		TypedQuery<Task> query = entityManager.createQuery(criteriaQuery);
+		return query.getResultList();
 	}
-
-
 
 	public List<Task> findAll() {
 		TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t", Task.class);
@@ -85,6 +83,9 @@ public class TaskRepository implements Serializable {
 	}
 
 	public Task save(Task task) {
+		System.out.println("Título: " + task.getTitle() + " Descrição: " + task.getDescription() + " Prioridade: "
+				+ task.getPriority() + " Deadline: " + task.getDeadline() + " Responsável: " + task.getResponsible()
+				+ " Situação: " + task.getSituation());
 		return entityManager.merge(task);
 	}
 

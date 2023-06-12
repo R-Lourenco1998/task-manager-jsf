@@ -11,6 +11,7 @@ import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
 import com.rlourenco.enumerator.SituationEnum;
 import com.rlourenco.service.TaskService;
+import com.rlourenco.util.FacesMessages;
 
 @Named()
 @ViewScoped
@@ -21,6 +22,9 @@ public class TaskBean implements Serializable {
 	private List<Task> tasksList;
 
 	@Inject
+	private FacesMessages messages;
+
+	@Inject
 	private TaskService taskService;
 
 	private Task task = new Task();
@@ -28,22 +32,41 @@ public class TaskBean implements Serializable {
 	private Long idFilter;
 
 	private String titleDescriptionFilter;
-	
+
 	private PriorityLevelEnum priorityFilter;
-	
+
 	private ResponsibleEnum responsibleFilter;
-	
+
 	private SituationEnum situationFilter;
 
 	public void search() {
-		tasksList = taskService.searchTasks(titleDescriptionFilter, idFilter, priorityFilter, responsibleFilter, situationFilter);
+		tasksList = taskService.searchTasks(titleDescriptionFilter, idFilter, priorityFilter, responsibleFilter,
+				situationFilter);
+	}
+
+	private boolean wasResearch() {
+		return titleDescriptionFilter != null && !"".equals(titleDescriptionFilter);
+	}
+
+	public void prepareNewTask() {
+		task = new Task();
+	}
+
+	public void save() {
+		task.setSituation(SituationEnum.IN_PROGRESS);
+		taskService.save(task);
+		if (wasResearch()) {
+			search();
+		}
+		messages.info("Tarefa cadastrada com sucesso!");
+		getAllTasks();
 	}
 
 	public Task getTask() {
 		return task;
 	}
 
-	public void AllTasks() {
+	public void getAllTasks() {
 		tasksList = taskService.getAllTasks();
 	}
 
@@ -102,7 +125,5 @@ public class TaskBean implements Serializable {
 	public void setSituationFilter(SituationEnum situationFilter) {
 		this.situationFilter = situationFilter;
 	}
-	
-	
 
 }

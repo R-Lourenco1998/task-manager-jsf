@@ -10,7 +10,7 @@
 	<h:outputStylesheet library="css" name="style.css" />
 
 	<f:metadata>
-		<f:viewAction action="#{taskBean.AllTasks}"></f:viewAction>
+		<f:viewAction action="#{taskBean.getAllTasks}"></f:viewAction>
 	</f:metadata>
 </h:head>
 <h:body>
@@ -79,37 +79,43 @@
 						</div>
 					</div>
 				</div>
+				<p:messages autoUpdate="true" />
 				<p:dataTable id="tasksDataTable" value="#{taskBean.tasksList}"
 					var="task" stripedRows="true" paginator="true" rows="5"
 					paginatorPosition="bottom"
 					emptyMessage="Nenhum registro encontrado">
-					<p:column class="table-head" style="width: 15px;" headerText="Número">
+					<p:column class="table-head" style="width: 15px;"
+						headerText="Número">
 						<h:outputText value="#{task.id}" />
 					</p:column>
-					<p:column class="table-head" sortBy="#{task.title}" style="width: 88px;"
-						headerText="Título">
+					<p:column class="table-head" sortBy="#{task.title}"
+						style="width: 88px;" headerText="Título">
 						<h:outputText value="#{task.title}" />
 					</p:column>
 					<p:column class="table-head" headerText="Descrição">
 						<h:outputText value="#{task.description}" />
 					</p:column>
-					<p:column class="table-head" style="width: 45px;" headerText="Responsável">
+					<p:column class="table-head" style="width: 45px;"
+						headerText="Responsável">
 						<h:outputText value="#{task.responsible.description}" />
 					</p:column>
-					<p:column class="table-head" style="width: 45px;" headerText="Prioridade">
+					<p:column class="table-head" style="width: 45px;"
+						headerText="Prioridade">
 						<h:outputText value="#{task.priority.description}" />
 					</p:column>
 
-					<p:column class="table-head" style="width: 45px;" headerText="Situação">
+					<p:column class="table-head" style="width: 45px;"
+						headerText="Situação">
 						<h:outputText value="#{task.situation.description}" />
 					</p:column>
-					<p:column class="table-head" style="width: 42px;" headerText="Deadline">
+					<p:column class="table-head" style="width: 42px;"
+						headerText="Deadline">
 						<h:outputText value="#{task.deadline}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					<p:column class="table-head" style="width: 60px;" headerText="Ações"
-						exportable="false">
+					<p:column class="table-head" style="width: 60px;"
+						headerText="Ações" exportable="false">
 						<p:commandButton icon="pi pi-pencil"
 							styleClass="edit-button rounded-button ui-button-secondary"
 							process="@this">
@@ -126,10 +132,11 @@
 					</p:column>
 				</p:dataTable>
 
-				<p:dialog modal="true" resizable="false" closeOnEscape="true"
-					draggable="false" header="Cadastrar Tarefa"
+				<p:dialog id="createTaskDialog" modal="true" resizable="false"
+					closeOnEscape="true" draggable="false" header="Cadastrar Tarefa"
 					widgetVar="taskDialogWidgetVar">
-					<h:panelGrid columns="2">
+					<h:panelGrid id="taskPanelGrid" columns="2"
+						rendered="#{taskBean.task ne null}">
 						<p:outputLabel value="Título: " for="title" />
 						<p:inputText class="title" id="title"
 							value="#{taskBean.task.title}" />
@@ -157,13 +164,18 @@
 						<p:calendar pattern="dd/MM/yyyy" size="30" id="deadline"
 							showTime="false" value="#{taskBean.task.deadline}" />
 						<h:outputLabel />
-						<p:commandButton value="Salvar" />
+						<p:commandButton value="Salvar"
+							oncomplete="PF('taskDialogWidgetVar').hide()"
+							actionListener="#{taskBean.save}"
+							update="tasksDataTable taskPanelGrid" process="createTaskDialog" />
 					</h:panelGrid>
 				</p:dialog>
 				<div>
 					<p:commandButton class="create-task-btn" type="submit"
-						value="Adicionar Tarefa" icon="ui-icon-check"
-						oncomplete="PF('taskDialogWidgetVar').show()" />
+						value="Adicionar Tarefa" icon="ui-icon-check" process="@this"
+						update="createTaskDialog"
+						oncomplete="PF('taskDialogWidgetVar').show()"
+						actionListener="#{taskBean.prepareNewTask}" />
 				</div>
 			</h:form>
 		</p:panel>
