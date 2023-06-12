@@ -35,11 +35,6 @@ public class TaskBean implements Serializable {
 	
 	private SituationEnum situationFilter;
 
-	public void save() {
-		System.out.println("Título: " + task.getTitle() + "Descrição: " + task.getDescription() + "Prioridade: "
-				+ task.getPriority() + "Deadline: " + task.getDeadline() + "Responsável: " + task.getResponsible());
-	}
-
 	public void search() {
 		tasksList = taskService.searchTasks(titleDescriptionFilter, idFilter, priorityFilter, responsibleFilter, situationFilter);
 	}

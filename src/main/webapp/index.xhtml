@@ -30,12 +30,15 @@
 
 					</div>
 					<div class="panel-input-column">
-						<p:inputNumber placeholder="Número" id="input-number-filter" value="#{taskBean.idFilter}" />
+						<p:inputNumber placeholder="Número" id="input-number-filter"
+							decimalPlaces="0" value="#{taskBean.idFilter}" />
 						<p:inputText maxlength="25" id="input-title-filter"
-							placeholder="Título/Descrição" value="#{taskBean.titleDescriptionFilter}" />
+							placeholder="Título/Descrição"
+							value="#{taskBean.titleDescriptionFilter}" />
 						<div class="panel-input-column-row">
 							<div>
-								<p:selectOneMenu id="responsibleFilter" value="#{taskBean.responsibleFilter}" >
+								<p:selectOneMenu id="responsibleFilter"
+									value="#{taskBean.responsibleFilter}">
 									<f:selectItem itemLabel="Selecione" itemValue=""
 										noSelectionOption="true" />
 									<f:selectItems value="#{taskBean.responsibles}"
@@ -46,7 +49,8 @@
 							</div>
 							<div>
 								<h:outputLabel value="Situação: " />
-								<p:selectOneMenu id="situationFilter" value="#{taskBean.situationFilter}">
+								<p:selectOneMenu id="situationFilter"
+									value="#{taskBean.situationFilter}">
 									<f:selectItem itemLabel="Selecione" itemValue=""
 										noSelectionOption="true" />
 									<f:selectItems value="#{taskBean.situations}"
@@ -57,7 +61,8 @@
 							</div>
 							<div>
 								<h:outputLabel value="Prioridade: " />
-								<p:selectOneMenu id="priorityFilter" value="#{taskBean.priorityFilter}">
+								<p:selectOneMenu id="priorityFilter"
+									value="#{taskBean.priorityFilter}">
 									<f:selectItem itemLabel="Selecione" itemValue=""
 										noSelectionOption="true" />
 									<f:selectItems value="#{taskBean.priorityLevels}"
@@ -67,42 +72,43 @@
 								</p:selectOneMenu>
 							</div>
 							<div>
-								<p:commandButton type="submit" update="tasksDataTable" actionListener="#{taskBean.search}" value="Buscar Tarefas"
+								<p:commandButton type="submit" update="tasksDataTable"
+									actionListener="#{taskBean.search}" value="Buscar Tarefas"
 									icon="ui-icon-check" />
 							</div>
 						</div>
 					</div>
 				</div>
 				<p:dataTable id="tasksDataTable" value="#{taskBean.tasksList}"
-					var="task" stripedRows="true" paginator="true" rows="10"
+					var="task" stripedRows="true" paginator="true" rows="5"
 					paginatorPosition="bottom"
 					emptyMessage="Nenhum registro encontrado">
-					<p:column style="width: 15px;" headerText="Número">
+					<p:column class="table-head" style="width: 15px;" headerText="Número">
 						<h:outputText value="#{task.id}" />
 					</p:column>
-					<p:column sortBy="#{task.title}" style="width: 88px;"
+					<p:column class="table-head" sortBy="#{task.title}" style="width: 88px;"
 						headerText="Título">
 						<h:outputText value="#{task.title}" />
 					</p:column>
-					<p:column headerText="Descrição">
+					<p:column class="table-head" headerText="Descrição">
 						<h:outputText value="#{task.description}" />
 					</p:column>
-					<p:column style="width: 45px;" headerText="Responsável">
+					<p:column class="table-head" style="width: 45px;" headerText="Responsável">
 						<h:outputText value="#{task.responsible.description}" />
 					</p:column>
-					<p:column style="width: 45px;" headerText="Prioridade">
+					<p:column class="table-head" style="width: 45px;" headerText="Prioridade">
 						<h:outputText value="#{task.priority.description}" />
 					</p:column>
 
-					<p:column style="width: 45px;" headerText="Situação">
+					<p:column class="table-head" style="width: 45px;" headerText="Situação">
 						<h:outputText value="#{task.situation.description}" />
 					</p:column>
-					<p:column style="width: 42px;" headerText="Deadline">
+					<p:column class="table-head" style="width: 42px;" headerText="Deadline">
 						<h:outputText value="#{task.deadline}">
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					<p:column style="width: 60px;" headerText="Ações"
+					<p:column class="table-head" style="width: 60px;" headerText="Ações"
 						exportable="false">
 						<p:commandButton icon="pi pi-pencil"
 							styleClass="edit-button rounded-button ui-button-secondary"
@@ -129,14 +135,9 @@
 							value="#{taskBean.task.title}" />
 
 						<p:outputLabel value="Descrição: " for="description" />
-						<p:inputTextarea counter="displayCount" maxlength="50" cols="60"
-							counterTemplate="{0} Caracteres restantes." id="description"
-							rows="1" autoResize="true" value="#{taskBean.task.description}" />
-						<div style="display: flex; flex-direction: row;">
-							<h:outputText id="displayCount" class="block" />
-						</div>
-					</h:panelGrid>
-					<h:panelGrid columns="4">
+						<p:inputTextarea class="title" maxlength="50" cols="60"
+							id="description" rows="1" autoResize="true"
+							value="#{taskBean.task.description}" />
 						<p:outputLabel value="Prioridade: " for="priority" />
 						<p:selectOneMenu id="priority" value="#{taskBean.task.priority}">
 							<f:selectItem itemLabel="Selecione..." />
@@ -152,14 +153,12 @@
 								itemValue="#{responsible}"
 								itemLabel="#{responsible.description}" />
 						</p:selectOneMenu>
+						<h:outputLabel for="deadline" value="Deadline: " />
+						<p:calendar pattern="dd/MM/yyyy" size="30" id="deadline"
+							showTime="false" value="#{taskBean.task.deadline}" />
+						<h:outputLabel />
+						<p:commandButton value="Salvar" />
 					</h:panelGrid>
-
-					<h:panelGrid rendered="#{taskBean.task ne null}">
-						<h:outputLabel for="deadLine" value="Deadline: " />
-						<p:calendar id="deadLine"
-							showTime="true" value="#{taskBean.task.deadline}" />
-					</h:panelGrid>
-					
 				</p:dialog>
 				<div>
 					<p:commandButton class="create-task-btn" type="submit"

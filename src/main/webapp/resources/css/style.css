@@ -7,7 +7,7 @@ label {
 }
 
 /*Apply to all table heads*/
-th, td {
+.table-head{
 	text-align: center !important;
 	width: 121px;
 }
@@ -35,9 +35,9 @@ body .ui-button.rounded-button.ui-button-icon-only{
 	}
 
 /*Apply to panel content*/
-.ui-panel-content {
+/* .ui-panel-content {
 	height: 650px;
-}
+} */
 
 .ui-datatable{
 	margin-top: 25px;
@@ -145,7 +145,7 @@ body .ui-button.rounded-button.ui-button-icon-only{
 }
 
 .title{
-	width: 476px !important;
+	width: 30rem !important;
 }
 
 .ui-panel-content{
