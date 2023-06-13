@@ -23,7 +23,7 @@ public class TaskService implements Serializable {
 	public void save(Task task) {
 		repository.save(task);
 	}
-
+	
 	@Transactional
 	public void delete(Task task) {
 		repository.delete(task);

@@ -115,19 +115,26 @@
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					<p:column class="table-head" style="width: 60px;"
-						headerText="Ações" exportable="false">
+					<p:column style="width: 60px;" headerText="Ações"
+						exportable="false">
 						<p:commandButton icon="pi pi-pencil"
+							update=":dialogs:edit-task-content"
+							actionListener="#{taskBean.prepareEditTask}"
+							oncomplete="PF('editTaskDialog').show()"
 							styleClass="edit-button rounded-button ui-button-secondary"
 							process="@this">
+							<f:setPropertyActionListener value="#{task}"
+								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-danger rounded-button"
 							icon="pi pi-trash" process="@this">
-
+							<f:setPropertyActionListener value="#{task}"
+								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-success rounded-button"
 							icon="pi pi-check-circle" process="@this">
-
+							<f:setPropertyActionListener value="#{task}"
+								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
@@ -137,7 +144,8 @@
 					closeOnEscape="true" draggable="false" header="Cadastrar Tarefa"
 					widgetVar="taskDialogWidgetVar">
 					<p:messages id="taskMessages" />
-					<p:defaultCommand target="saveCommandButton" scope="createTaskDialog" />
+					<p:defaultCommand target="saveCommandButton"
+						scope="createTaskDialog" />
 					<h:panelGrid id="taskPanelGrid" columns="2"
 						rendered="#{taskBean.task ne null}">
 						<p:outputLabel value="Título: " for="title" />
@@ -173,6 +181,55 @@
 							oncomplete="if (!args.validationFailed) PF('taskDialogWidgetVar').hide()"
 							process="createTaskDialog" />
 					</h:panelGrid>
+				</p:dialog>
+
+				<p:dialog id="edit-task-content" header="Editar tarefa"
+					showEffect="fade" closeOnEscape="true" draggable="false" resizable="false" modal="true" widgetVar="editTaskDialog"
+					responsive="true">
+					<h:panelGrid columns="2"
+						rendered="#{taskBean.selectedTask ne null}">
+						<p:outputLabel for="edit-title">Título: </p:outputLabel>
+						<p:inputText maxlength="50" class="title"
+							id="edit-title" value="#{taskBean.selectedTask.title}" />
+
+						<p:outputLabel id="edit-description" for="edit-description">Descrição: </p:outputLabel>
+						<p:inputTextarea class="title" maxlength="50" cols="60" rows="1"
+							value="#{taskBean.selectedTask.description}" />
+					</h:panelGrid>
+					<h:panelGrid columns="4"
+						rendered="#{taskBean.selectedTask ne null}">
+
+						<p:outputLabel for="edit-responsible">Responsável: </p:outputLabel>
+						<p:selectOneMenu id="edit-responsible"
+							value="#{taskBean.selectedTask.responsible}">
+							<f:selectItems value="#{taskBean.responsibles}" var="responsible"
+								itemLabel="#{responsible.description}"
+								itemValue="#{responsible}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel for="edit-priority">Prioridade: </p:outputLabel>
+						<p:selectOneMenu id="edit-priority"
+							value="#{taskBean.selectedTask.priority}">
+							<f:selectItems value="#{taskBean.priorityLevels}"
+								var="priorityLevel" itemLabel="#{priorityLevel.description}"
+								itemValue="#{priorityLevel}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="Deadline: " for="deadline" />
+						<p:calendar pattern="dd/MM/yyyy" size="30" id="edit-deadline"
+							showTime="false" value="#{taskBean.selectedTask.deadline}" />
+						<h:outputLabel />
+
+					</h:panelGrid>
+					<f:facet name="footer">
+						<p:commandButton type="submit" value="Salvar" icon="pi pi-check"
+							actionListener="#{taskBean.updateTask}"
+							update=":form:tasksDataTable" process="edit-task-content @this"
+							oncomplete="PF('editTaskDialog').hide()" />
+						<p:commandButton value="Cancelar" icon="pi pi-times"
+							onclick="PF('editTaskDialog').hide()"
+							styleClass="ui-button-raised ui-button-danger" type="button" />
+					</f:facet>
 				</p:dialog>
 				<div>
 					<p:commandButton class="create-task-btn" value="Adicionar Tarefa"

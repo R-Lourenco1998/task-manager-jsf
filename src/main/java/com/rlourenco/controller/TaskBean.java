@@ -32,6 +32,8 @@ public class TaskBean implements Serializable {
 	private TaskService taskService;
 
 	private Task task = new Task();
+	
+	private Task selectedTask = new Task();
 
 	private Long idFilter;
 
@@ -55,6 +57,11 @@ public class TaskBean implements Serializable {
 	public void prepareNewTask() {
 		task = new Task();
 	}
+	
+
+	public void prepareEditTask() {
+		setSelectedTask(new Task());
+	}
 
 	public void save() {
 		task.setSituation(SituationEnum.IN_PROGRESS);
@@ -65,6 +72,10 @@ public class TaskBean implements Serializable {
 //		}
 		messages.info("Tarefa salva com sucesso!");
 		RequestContext.getCurrentInstance().update(Arrays.asList("form:tasksDataTable", "dialogs:taskMessages", "form:messages"));
+	}
+	
+	public void updateTask() {
+		taskService.save(selectedTask);
 	}
 
 	public Task getTask() {
@@ -129,6 +140,14 @@ public class TaskBean implements Serializable {
 
 	public void setSituationFilter(SituationEnum situationFilter) {
 		this.situationFilter = situationFilter;
+	}
+
+	public Task getSelectedTask() {
+		return selectedTask;
+	}
+
+	public void setSelectedTask(Task selectedTask) {
+		this.selectedTask = selectedTask;
 	}
 
 }

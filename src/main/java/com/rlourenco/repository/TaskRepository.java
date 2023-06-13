@@ -40,7 +40,7 @@ public class TaskRepository implements Serializable {
 		query.setParameter("title", search + "%");
 		return query.getResultList();
 	}
-	
+
 	public List<Task> searchWithCriteria(String search, Long idFilter, PriorityLevelEnum priorityFilter,
 			ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -53,9 +53,8 @@ public class TaskRepository implements Serializable {
 		if (search != null) { // Verificar se a variável search é diferente de null
 			String searchLower = search.toLowerCase();
 			predicate = criteriaBuilder.or(
-				criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchLower + "%"),
-				criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchLower + "%")
-			);
+					criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchLower + "%"),
+					criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchLower + "%"));
 		}
 
 		if (priorityFilter != null) {
@@ -63,7 +62,8 @@ public class TaskRepository implements Serializable {
 		}
 
 		if (responsibleFilter != null) {
-			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("responsible"), responsibleFilter));
+			predicate = criteriaBuilder.and(predicate,
+					criteriaBuilder.equal(root.get("responsible"), responsibleFilter));
 		}
 
 		if (situationFilter != null) {
@@ -74,14 +74,14 @@ public class TaskRepository implements Serializable {
 			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("id"), idFilter));
 		}
 
+		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("id")));
 		criteriaQuery.where(predicate);
-
 		TypedQuery<Task> query = entityManager.createQuery(criteriaQuery);
 		return query.getResultList();
 	}
 
 	public List<Task> findAll() {
-		TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t", Task.class);
+		TypedQuery<Task> query = entityManager.createQuery("SELECT t FROM Task t ORDER BY t.id", Task.class);
 		return query.getResultList();
 	}
 
