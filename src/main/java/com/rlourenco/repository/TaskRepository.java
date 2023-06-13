@@ -40,7 +40,7 @@ public class TaskRepository implements Serializable {
 		query.setParameter("title", search + "%");
 		return query.getResultList();
 	}
-
+	
 	public List<Task> searchWithCriteria(String search, Long idFilter, PriorityLevelEnum priorityFilter,
 			ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -48,19 +48,22 @@ public class TaskRepository implements Serializable {
 		Root<Task> root = criteriaQuery.from(Task.class);
 		criteriaQuery.select(root);
 
-		String searchLower = search.toLowerCase();
+		Predicate predicate = criteriaBuilder.conjunction(); // Predicado vazio inicialmente
 
-		Predicate predicate = criteriaBuilder.or(
+		if (search != null) { // Verificar se a variável search é diferente de null
+			String searchLower = search.toLowerCase();
+			predicate = criteriaBuilder.or(
 				criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchLower + "%"),
-				criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchLower + "%"));
+				criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%" + searchLower + "%")
+			);
+		}
 
 		if (priorityFilter != null) {
 			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("priority"), priorityFilter));
 		}
 
 		if (responsibleFilter != null) {
-			predicate = criteriaBuilder.and(predicate,
-					criteriaBuilder.equal(root.get("responsible"), responsibleFilter));
+			predicate = criteriaBuilder.and(predicate, criteriaBuilder.equal(root.get("responsible"), responsibleFilter));
 		}
 
 		if (situationFilter != null) {

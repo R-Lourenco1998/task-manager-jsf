@@ -21,7 +21,7 @@
 	<div class="body">
 		<p:panel class="panel" header="Listagem de Tarefas">
 			<h:form id="form">
-				<p:growl id="messages" />
+			<p:growl id="messages" />
 				<div class="panel-body">
 					<div class="panel-label-column">
 						<h:outputLabel value="Número: " />
@@ -120,7 +120,6 @@
 						<p:commandButton icon="pi pi-pencil"
 							styleClass="edit-button rounded-button ui-button-secondary"
 							process="@this">
-							<p:resetInput target=":dialogs:edit-task-content" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-danger rounded-button"
 							icon="pi pi-trash" process="@this">
@@ -132,7 +131,8 @@
 						</p:commandButton>
 					</p:column>
 				</p:dataTable>
-
+			</h:form>
+			<h:form id="dialogs">
 				<p:dialog id="createTaskDialog" modal="true" resizable="false"
 					closeOnEscape="true" draggable="false" header="Cadastrar Tarefa"
 					widgetVar="taskDialogWidgetVar">
@@ -173,12 +173,10 @@
 					</h:panelGrid>
 				</p:dialog>
 				<div>
-					<p:commandButton class="create-task-btn" type="submit"
-						value="Adicionar Tarefa" icon="ui-icon-check"
-						update="createTaskDialog"
+					<p:commandButton class="create-task-btn" value="Adicionar Tarefa"
+						icon="ui-icon-check" update="createTaskDialog"
 						oncomplete="PF('taskDialogWidgetVar').show()"
 						actionListener="#{taskBean.prepareNewTask}" process="@this">
-						
 						<p:resetInput target="createTaskDialog"/>
 					</p:commandButton>
 				</div>

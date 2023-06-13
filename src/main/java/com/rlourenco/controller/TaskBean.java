@@ -48,9 +48,9 @@ public class TaskBean implements Serializable {
 				situationFilter);
 	}
 
-	private boolean wasResearch() {
-		return titleDescriptionFilter != null && !"".equals(titleDescriptionFilter);
-	}
+//	private boolean wasResearch() {
+//		return titleDescriptionFilter != null && !"".equals(titleDescriptionFilter);
+//	}
 
 	public void prepareNewTask() {
 		task = new Task();
@@ -59,12 +59,12 @@ public class TaskBean implements Serializable {
 	public void save() {
 		task.setSituation(SituationEnum.IN_PROGRESS);
 		taskService.save(task);
-		if (wasResearch()) {
-			search();
-		}
-		messages.info("Tarefa salva com sucesso!");
 		getAllTasks();
-		RequestContext.getCurrentInstance().update(Arrays.asList("form:tasksDataTable", "form:messages"));
+//		if (wasResearch()) {
+//			search();
+//		}
+		messages.info("Tarefa salva com sucesso!");
+		RequestContext.getCurrentInstance().update(Arrays.asList("form:tasksDataTable", "dialogs:taskMessages", "form:messages"));
 	}
 
 	public Task getTask() {
