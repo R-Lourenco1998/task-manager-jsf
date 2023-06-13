@@ -46,32 +46,32 @@ body .ui-button.rounded-button.ui-button-icon-only{
 
 /* ################Main page content configurations################*/
 .header {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
 	height: 80px;
 	max-height: 90px;
 }
 
 .body {
-	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 	display: flex;
-	height: 85vh;
 }
 
 /* ################General panel configurations################ */
 .panel {
 	width: 70vw;
+	
 	min-width: 380px;
 }
+
 
 .panel .panel-body {
 	display: flex;
 	flex-direction: row;
+}
+
+body .ui-panel .ui-panel-titlebar+.ui-panel-content{
+	height: 43rem;
 }
 
 .panel-body .panel-label-column {

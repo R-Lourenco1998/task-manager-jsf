@@ -1,21 +1,22 @@
 package com.rlourenco.controller;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 
 import com.rlourenco.entity.Task;
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
 import com.rlourenco.enumerator.SituationEnum;
 import com.rlourenco.service.TaskService;
-import com.rlourenco.util.FacesMessages;
+//import com.rlourenco.util.FacesMessages;
 
 @Named()
 @ViewScoped
@@ -25,14 +26,14 @@ public class TaskBean implements Serializable {
 
 	private List<Task> tasksList;
 
-	@Inject
-	private FacesMessages messages;
+//	@Inject
+//	private FacesMessages messages;
 
 	@Inject
 	private TaskService taskService;
 
 	private Task task = new Task();
-	
+
 	private Task selectedTask = new Task();
 
 	private Long idFilter;
@@ -57,7 +58,6 @@ public class TaskBean implements Serializable {
 	public void prepareNewTask() {
 		task = new Task();
 	}
-	
 
 	public void prepareEditTask() {
 		setSelectedTask(new Task());
@@ -66,14 +66,11 @@ public class TaskBean implements Serializable {
 	public void save() {
 		task.setSituation(SituationEnum.IN_PROGRESS);
 		taskService.save(task);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tarefa criada."));
+		PrimeFaces.current().ajax().update("form:messages");
 		getAllTasks();
-//		if (wasResearch()) {
-//			search();
-//		}
-		messages.info("Tarefa salva com sucesso!");
-		RequestContext.getCurrentInstance().update(Arrays.asList("form:tasksDataTable", "dialogs:taskMessages", "form:messages"));
 	}
-	
+
 	public void updateTask() {
 		taskService.save(selectedTask);
 	}
