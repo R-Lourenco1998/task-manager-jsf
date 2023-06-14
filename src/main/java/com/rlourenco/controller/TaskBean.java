@@ -51,10 +51,6 @@ public class TaskBean implements Serializable {
 				situationFilter);
 	}
 
-//	private boolean wasResearch() {
-//		return titleDescriptionFilter != null && !"".equals(titleDescriptionFilter);
-//	}
-
 	public void prepareNewTask() {
 		task = new Task();
 	}
@@ -68,7 +64,6 @@ public class TaskBean implements Serializable {
 		taskService.save(task);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tarefa criada."));
 		PrimeFaces.current().ajax().update("form:messages");
-		getAllTasks();
 	}
 
 	public void updateTask() {

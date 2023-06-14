@@ -176,7 +176,7 @@
 						<h:outputLabel />
 						<p:commandButton id="saveCommandButton" value="Salvar"
 							actionListener="#{taskBean.save}"
-							update="taskPanelGrid taskMessages"
+							update=":form:tasksDataTable taskPanelGrid taskMessages"
 							oncomplete="if (!args.validationFailed) PF('taskDialogWidgetVar').hide()"
 							process="createTaskDialog" />
 					</h:panelGrid>
