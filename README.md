@@ -24,7 +24,7 @@
 
 ## Screenshots
 
-![App Screenshot](https://i.imgur.com/AzDGnj8.png)
+![App Screenshot](https://i.imgur.com/CbFPegI.png)
 
 
 ## Funcionalidades
