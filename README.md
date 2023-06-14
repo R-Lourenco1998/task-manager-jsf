@@ -16,7 +16,7 @@
   <li>Eclipse IDE</li>
   <li>JSF</li>  
   <li>PrimeFaces 12</li>
-  <li>Tomcat</li> 
+  <li>Tomcat 8.5</li> 
   <li>JPA</li>
   <li>PostgreSQL</li>
   <li>Maven</li>

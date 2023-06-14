@@ -9,6 +9,15 @@ label {
 	width: 121px;
 }
 
+th{
+	background: #607d8b !important;
+	color: white !important;
+}
+
+.table-head-color {
+	background: #607d8b !important;
+	color: white !important;
+}
 .ui-tag {
 	font-size: 1.4rem !important;
 	width: 40vw;
