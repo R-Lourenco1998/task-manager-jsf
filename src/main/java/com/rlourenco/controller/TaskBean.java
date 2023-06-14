@@ -69,6 +69,9 @@ public class TaskBean implements Serializable {
 
 	public void updateTask() {
 		taskService.save(selectedTask);
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tarefa atualizada com sucesso!"));
+		PrimeFaces.current().ajax().update("form:messages");
+		getAllTasks();
 	}
 	
 	public void deleteTask() {

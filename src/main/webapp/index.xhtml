@@ -15,11 +15,19 @@
 </h:head>
 <h:body>
 
-	<header class="header">
-		<h:graphicImage library="css" name="logo.png" style="width: 30px;" />
-	</header>
+	<div
+		style="display: flex; flex-direction: row; justify-content: center;">
+
+		<header style="display: flex; align-items: center;" class="header">
+			<h1 style="margin-right: 1rem; color: white;">Gerenciador de
+				Tarefas</h1>
+			<i style="font-size: 2rem; color: greenyellow;"
+				class="pi pi-check-circle"></i>
+		</header>
+	</div>
+
 	<div class="body">
-		<p:panel class="panel" header="Listagem de Tarefas">
+		<p:panel class="panel title-bar-inverted" header="Listagem de Tarefas">
 			<h:form id="form">
 				<p:growl id="messages" />
 				<div class="panel-body">
@@ -74,15 +82,15 @@
 							<div>
 								<p:commandButton type="submit"
 									update="tasksDataTable messagesTable"
-									actionListener="#{taskBean.search}" value="Buscar Tarefas"
-									icon="ui-icon-check" />
+									actionListener="#{taskBean.search}" value="Buscar"
+									icon="ui-icon-check" styleClass="ui-button-secondary" />
 							</div>
 						</div>
 					</div>
 				</div>
 				<p:messages id="messagesTable" />
 				<p:dataTable id="tasksDataTable" value="#{taskBean.tasksList}"
-					var="task" stripedRows="true" paginator="true" rows="3"
+					var="task" stripedRows="true" paginator="true" rows="5"
 					paginatorPosition="bottom"
 					emptyMessage="Nenhum registro encontrado">
 					<p:column class="table-head" style="width: 15px;"
@@ -117,22 +125,24 @@
 					</p:column>
 					<p:column style="width: 60px;" headerText="Ações"
 						exportable="false">
-						<p:commandButton icon="pi pi-pencil"
+						<p:commandButton icon="pi pi-file-edit"
 							update=":dialogs:edit-task-content"
 							actionListener="#{taskBean.prepareEditTask}"
 							oncomplete="PF('editTaskDialog').show()"
-							styleClass="edit-button rounded-button ui-button-secondary"
+							styleClass="edit-button rounded-button ui-button-warning ui-button-outlined"
 							process="@this">
 							<f:setPropertyActionListener value="#{task}"
 								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
-						<p:commandButton class="ui-button-danger rounded-button"
-							icon="pi pi-trash" process="@this"
+						<p:commandButton
+							class="ui-button-danger rounded-button ui-button-outlined"
+							icon="pi pi-times-circle" process="@this"
 							oncomplete="PF('deleteTaskDialog').show()">
 							<f:setPropertyActionListener value="#{task}"
 								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
-						<p:commandButton class="ui-button-success rounded-button"
+						<p:commandButton
+							class="ui-button-success rounded-button ui-button-outlined"
 							icon="pi pi-check-circle" process="@this"
 							oncomplete="PF('concludeTaskDialog').show()"
 							disabled="#{task.situation ne 'IN_PROGRESS'}">
@@ -146,7 +156,7 @@
 				<p:dialog id="createTaskDialog" modal="true" resizable="false"
 					closeOnEscape="true" draggable="false" header="Cadastrar Tarefa"
 					widgetVar="taskDialogWidgetVar">
-					<p:messages id="taskMessages" />
+					<p:messages id="taskMessages" style="display: flex" />
 					<p:defaultCommand target="saveCommandButton"
 						scope="createTaskDialog" />
 					<h:panelGrid id="taskPanelGrid" columns="2"
@@ -160,7 +170,7 @@
 							autoResize="true" value="#{taskBean.task.description}" />
 						<p:outputLabel value="Prioridade: " for="priority" />
 						<p:selectOneMenu id="priority" value="#{taskBean.task.priority}">
-							<f:selectItem itemLabel="Selecione..." />
+							<f:selectItem itemLabel="Selecione" />
 							<f:selectItems value="#{taskBean.priorityLevels}"
 								var="priorityLevel" itemLabel="#{priorityLevel.description}"
 								itemValue="#{priorityLevel}" />
@@ -168,7 +178,7 @@
 						<p:outputLabel value="Responsável: " for="responsible" />
 						<p:selectOneMenu id="responsible"
 							value="#{taskBean.task.responsible}">
-							<f:selectItem itemLabel="Selecione..." />
+							<f:selectItem itemLabel="Selecione" />
 							<f:selectItems value="#{taskBean.responsibles}" var="responsible"
 								itemValue="#{responsible}"
 								itemLabel="#{responsible.description}" />
@@ -181,7 +191,7 @@
 							actionListener="#{taskBean.save}"
 							update=":form:tasksDataTable taskPanelGrid taskMessages"
 							oncomplete="if (!args.validationFailed) PF('taskDialogWidgetVar').hide()"
-							process="createTaskDialog" />
+							styleClass="ui-button-success" process="createTaskDialog" />
 					</h:panelGrid>
 				</p:dialog>
 
@@ -198,8 +208,8 @@
 				</p:confirmDialog>
 
 				<p:confirmDialog widgetVar="concludeTaskDialog" showEffect="fade"
-					width="300" message="Deseja realmente concluir a tarefa?" header="Confirmar"
-					severity="warn">
+					width="300" message="Deseja realmente concluir a tarefa?"
+					header="Confirmar" severity="warn">
 					<p:commandButton value="Sim" icon="pi pi-check"
 						actionListener="#{taskBean.concludeTask}" process="@this"
 						oncomplete="PF('concludeTaskDialog').hide()"
@@ -252,14 +262,16 @@
 						<p:commandButton type="submit" value="Salvar" icon="pi pi-check"
 							actionListener="#{taskBean.updateTask}"
 							update=":form:tasksDataTable" process="edit-task-content @this"
-							oncomplete="PF('editTaskDialog').hide()" />
+							oncomplete="PF('editTaskDialog').hide()"
+							styleClass="ui-button-success" />
 						<p:commandButton value="Cancelar" icon="pi pi-times"
 							onclick="PF('editTaskDialog').hide()"
 							styleClass="ui-button-raised ui-button-danger" type="button" />
 					</f:facet>
 				</p:dialog>
 				<div>
-					<p:commandButton class="create-task-btn" value="Adicionar Tarefa"
+					<p:commandButton class="create-task-btn ui-button-secondary"
+						style="margin-top: 11rem;" value="Adicionar"
 						icon="ui-icon-check" update="createTaskDialog"
 						oncomplete="PF('taskDialogWidgetVar').show()"
 						actionListener="#{taskBean.prepareNewTask}" process="@this">
@@ -271,6 +283,6 @@
 	</div>
 
 
-	<footer> Teste técnico ESIG Group. </footer>
 </h:body>
+
 </html>
