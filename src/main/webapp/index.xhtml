@@ -134,7 +134,8 @@
 						</p:commandButton>
 						<p:commandButton class="ui-button-success rounded-button"
 							icon="pi pi-check-circle" process="@this"
-							oncomplete="PF('concludeTaskDialog').show()">
+							oncomplete="PF('concludeTaskDialog').show()"
+							disabled="#{task.situation ne 'IN_PROGRESS'}">
 							<f:setPropertyActionListener value="#{task}"
 								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
