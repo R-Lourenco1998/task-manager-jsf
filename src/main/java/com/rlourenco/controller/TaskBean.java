@@ -14,7 +14,6 @@ import com.rlourenco.enumerator.ResponsibleEnum;
 import com.rlourenco.enumerator.SituationEnum;
 import com.rlourenco.service.TaskService;
 
-
 @Named()
 @ViewScoped
 public class TaskBean implements Serializable {

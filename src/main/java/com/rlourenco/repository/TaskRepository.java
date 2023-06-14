@@ -1,8 +1,6 @@
 package com.rlourenco.repository;
-
 import java.io.Serializable;
 import java.util.List;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -10,7 +8,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-
 import com.rlourenco.entity.Task;
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
@@ -84,6 +81,7 @@ public class TaskRepository implements Serializable {
 	}
 
 	public void delete(Task task) {
+		task = findById(task.getId());
 		entityManager.remove(task);
 	}
 }

@@ -1,14 +1,11 @@
 package com.rlourenco.repository;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import com.rlourenco.entity.Task;
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;

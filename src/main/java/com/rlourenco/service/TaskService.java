@@ -2,9 +2,7 @@ package com.rlourenco.service;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import com.rlourenco.entity.Task;
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
@@ -23,7 +21,7 @@ public class TaskService implements Serializable {
 	public void save(Task task) {
 		repository.save(task);
 	}
-	
+
 	@Transactional
 	public void delete(Task task) {
 		repository.delete(task);
