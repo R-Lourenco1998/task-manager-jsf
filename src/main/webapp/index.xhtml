@@ -127,12 +127,14 @@
 								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-danger rounded-button"
-							icon="pi pi-trash" process="@this">
+							icon="pi pi-trash" process="@this"
+							oncomplete="PF('deleteTaskDialog').show()">
 							<f:setPropertyActionListener value="#{task}"
 								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
 						<p:commandButton class="ui-button-success rounded-button"
-							icon="pi pi-check-circle" process="@this">
+							icon="pi pi-check-circle" process="@this"
+							oncomplete="PF('concludeTaskDialog').show()">
 							<f:setPropertyActionListener value="#{task}"
 								target="#{taskBean.selectedTask}" />
 						</p:commandButton>
@@ -181,6 +183,30 @@
 							process="createTaskDialog" />
 					</h:panelGrid>
 				</p:dialog>
+
+				<p:confirmDialog widgetVar="deleteTaskDialog" showEffect="fade"
+					width="300" message="Deseja realmente excluir a tarefa?"
+					header="Confirmar" severity="warn">
+					<p:commandButton value="Sim" icon="pi pi-check"
+						actionListener="#{taskBean.deleteTask}" process="@this"
+						oncomplete="PF('deleteTaskDialog').hide()"
+						update=":form:tasksDataTable" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-button-raised ui-button-danger" icon="pi pi-times"
+						onclick="PF('deleteTaskDialog').hide()" />
+				</p:confirmDialog>
+
+				<p:confirmDialog widgetVar="concludeTaskDialog" showEffect="fade"
+					width="300" message="Deseja realmente concluir a tarefa?" header="Confirmar"
+					severity="warn">
+					<p:commandButton value="Sim" icon="pi pi-check"
+						actionListener="#{taskBean.concludeTask}" process="@this"
+						oncomplete="PF('concludeTaskDialog').hide()"
+						update=":form:tasksDataTable" />
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-button-raised ui-button-danger" icon="pi pi-times"
+						onclick="PF('concludeTaskDialog').hide()" />
+				</p:confirmDialog>
 
 				<p:dialog id="edit-task-content" header="Editar tarefa"
 					showEffect="fade" closeOnEscape="true" draggable="false"
