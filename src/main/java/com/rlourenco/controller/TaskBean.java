@@ -2,21 +2,18 @@ package com.rlourenco.controller;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-
 import org.primefaces.PrimeFaces;
-
 import com.rlourenco.entity.Task;
 import com.rlourenco.enumerator.PriorityLevelEnum;
 import com.rlourenco.enumerator.ResponsibleEnum;
 import com.rlourenco.enumerator.SituationEnum;
 import com.rlourenco.service.TaskService;
-//import com.rlourenco.util.FacesMessages;
+
 
 @Named()
 @ViewScoped
@@ -25,9 +22,6 @@ public class TaskBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private List<Task> tasksList;
-
-//	@Inject
-//	private FacesMessages messages;
 
 	@Inject
 	private TaskService taskService;

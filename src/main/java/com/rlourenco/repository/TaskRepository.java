@@ -35,12 +35,6 @@ public class TaskRepository implements Serializable {
 		return entityManager.find(Task.class, id);
 	}
 
-	public List<Task> search(String search) {
-		TypedQuery<Task> query = entityManager.createQuery("from Task where title like :title", Task.class);
-		query.setParameter("title", search + "%");
-		return query.getResultList();
-	}
-
 	public List<Task> searchWithCriteria(String search, Long idFilter, PriorityLevelEnum priorityFilter,
 			ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
 		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
@@ -48,9 +42,9 @@ public class TaskRepository implements Serializable {
 		Root<Task> root = criteriaQuery.from(Task.class);
 		criteriaQuery.select(root);
 
-		Predicate predicate = criteriaBuilder.conjunction(); // Predicado vazio inicialmente
+		Predicate predicate = criteriaBuilder.conjunction();
 
-		if (search != null) { // Verificar se a variável search é diferente de null
+		if (search != null) {
 			String searchLower = search.toLowerCase();
 			predicate = criteriaBuilder.or(
 					criteriaBuilder.like(criteriaBuilder.lower(root.get("title")), "%" + searchLower + "%"),
@@ -86,14 +80,10 @@ public class TaskRepository implements Serializable {
 	}
 
 	public Task save(Task task) {
-		System.out.println("Título: " + task.getTitle() + " Descrição: " + task.getDescription() + " Prioridade: "
-				+ task.getPriority() + " Deadline: " + task.getDeadline() + " Responsável: " + task.getResponsible()
-				+ " Situação: " + task.getSituation());
 		return entityManager.merge(task);
 	}
 
 	public void delete(Task task) {
-		task = findById(task.getId());
 		entityManager.remove(task);
 	}
 }

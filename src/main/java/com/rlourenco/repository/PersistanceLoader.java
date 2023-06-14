@@ -45,7 +45,7 @@ public class PersistanceLoader {
 
 		entityManager.getTransaction().commit();
 
-		List<Task> tasksLists = taskRepository.search("");
+		List<Task> tasksLists = taskRepository.findAll();
 		System.out.println(tasksLists);
 
 		entityManager.close();
