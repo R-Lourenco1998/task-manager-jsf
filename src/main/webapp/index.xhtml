@@ -90,7 +90,7 @@
 				</div>
 				<p:messages id="messagesTable" />
 				<p:dataTable id="tasksDataTable" value="#{taskBean.tasksList}"
-					var="task" stripedRows="true" paginator="true" rows="5"
+					var="task" stripedRows="true" paginator="true" rows="3"
 					paginatorPosition="bottom"
 					emptyMessage="Nenhum registro encontrado">
 					<p:column class="table-head" style="width: 15px;"
@@ -271,7 +271,7 @@
 				</p:dialog>
 				<div>
 					<p:commandButton class="create-task-btn ui-button-secondary"
-						style="margin-top: 11rem;" value="Adicionar" icon="ui-icon-check"
+						style="margin-top: 1rem;" value="Adicionar" icon="ui-icon-check"
 						update="createTaskDialog"
 						oncomplete="PF('taskDialogWidgetVar').show()"
 						actionListener="#{taskBean.prepareNewTask}" process="@this">

@@ -27,12 +27,10 @@ public class TaskService implements Serializable {
 		repository.delete(task);
 	}
 
-	@Transactional
 	public List<Task> getAllTasks() {
 		return repository.findAll();
 	}
 
-	@Transactional
 	public List<Task> searchTasks(String search, Long idFilter, PriorityLevelEnum priorityFilter,
 			ResponsibleEnum responsibleFilter, SituationEnum situationFilter) {
 		return repository.searchWithCriteria(search, idFilter, priorityFilter, responsibleFilter, situationFilter);

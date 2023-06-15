@@ -55,7 +55,7 @@ body .ui-button.rounded-button.ui-button-icon-only {
 	justify-content: center;
 	align-items: center;
 	display: flex;
-	margin-top: 4rem;
+	margin-top: 1.2rem;
 }
 
 body .ui-messages .ui-messages-error, body .ui-messages .ui-messages-fatal
@@ -83,7 +83,7 @@ body .ui-messages .ui-messages-error, body .ui-messages .ui-messages-fatal
 }
 
 body .ui-panel .ui-panel-titlebar+.ui-panel-content {
-	height: 54rem;
+	height: 42rem;
 }
 
 body .ui-panel .ui-panel-titlebar {

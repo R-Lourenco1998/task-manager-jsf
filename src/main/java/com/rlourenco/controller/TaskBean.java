@@ -49,7 +49,7 @@ public class TaskBean implements Serializable {
 	}
 
 	public void prepareEditTask() {
-		setSelectedTask(new Task());
+		selectedTask = new Task();
 	}
 
 	public void save() {
@@ -66,14 +66,14 @@ public class TaskBean implements Serializable {
 		PrimeFaces.current().ajax().update("form:messages");
 		getAllTasks();
 	}
-	
+
 	public void deleteTask() {
 		taskService.delete(selectedTask);
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Tarefa Excluída com sucesso!"));
 		PrimeFaces.current().ajax().update("form:messages");
 		getAllTasks();
 	}
-	
+
 	public void concludeTask() {
 		selectedTask.setSituation(SituationEnum.COMPLETED);
 		taskService.save(selectedTask);
@@ -82,12 +82,20 @@ public class TaskBean implements Serializable {
 		getAllTasks();
 	}
 
+	public void getAllTasks() {
+		tasksList = taskService.getAllTasks();
+	}
+
 	public Task getTask() {
 		return task;
 	}
 
-	public void getAllTasks() {
-		tasksList = taskService.getAllTasks();
+	public void setTask(Task task) {
+		this.task = task;
+	}
+
+	public void setTasksList(List<Task> tasksList) {
+		this.tasksList = tasksList;
 	}
 
 	public List<Task> getTasksList() {
