@@ -68,7 +68,7 @@ body .ui-messages .ui-messages-error, body .ui-messages .ui-messages-fatal
 }
 
 .panel {
-	width: 70vw;
+	width: 76vw !important;
 	min-width: 380px;
 }
 
