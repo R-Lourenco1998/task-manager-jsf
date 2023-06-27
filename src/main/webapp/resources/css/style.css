@@ -4,15 +4,21 @@ label {
 	padding: 10px;
 }
 
+td.description-cell .block {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: flex-end;
+}
+
 .table-head {
 	text-align: center !important;
 	width: 121px;
 }
 
-th{
+th {
 	background: #607d8b !important;
 	color: white !important;
-	
+
 }
 
 .ui-tag {
@@ -22,7 +28,8 @@ th{
 	min-height: 40px;
 }
 
-.ui-selectonemenu, .hasDatepicker {
+.ui-selectonemenu,
+.hasDatepicker {
 	width: 175px !important;
 	height: 37px !important
 }
@@ -58,8 +65,8 @@ body .ui-button.rounded-button.ui-button-icon-only {
 	margin-top: 1.2rem;
 }
 
-body .ui-messages .ui-messages-error, body .ui-messages .ui-messages-fatal
-	{
+body .ui-messages .ui-messages-error,
+body .ui-messages .ui-messages-fatal {
 	background: #ffcdd2;
 	border: 1px solid #ef5350;
 	border-width: 0 0 0 6px;
@@ -128,7 +135,8 @@ body .ui-panel .ui-panel-titlebar {
 	margin-top: 35px;
 }
 
-.table .th-number, .th-title {
+.table .th-number,
+.th-title {
 	width: 150px;
 }
 
@@ -141,14 +149,16 @@ body .ui-panel .ui-panel-titlebar {
 	min-width: 380px;
 }
 
-.panel .panel-row-title, .panel-row-deadline {
+.panel .panel-row-title,
+.panel-row-deadline {
 	display: flex;
 	flex-direction: row;
 	margin-bottom: 40px;
 	width: 100%;
 }
 
-.panel-title-label, .panel-description-label {
+.panel-title-label,
+.panel-description-label {
 	width: 150px;
 	text-align: right;
 	margin-top: 6px;
@@ -166,6 +176,7 @@ body .ui-panel .ui-panel-titlebar {
 	padding: 30px !important;
 }
 
-.input-title, .input-textarea-description {
+.input-title,
+.input-textarea-description {
 	width: 55vw;
 }

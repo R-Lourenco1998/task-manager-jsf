@@ -123,8 +123,8 @@
 							<f:convertDateTime pattern="dd/MM/yyyy" />
 						</h:outputText>
 					</p:column>
-					<p:column style="width: 60px;" styleClass="table-head" headerText="Ações"
-						exportable="false">
+					<p:column style="width: 60px;" styleClass="table-head"
+						headerText="Ações" exportable="false">
 						<p:commandButton icon="pi pi-file-edit"
 							update=":dialogs:edit-task-content"
 							actionListener="#{taskBean.prepareEditTask}"
@@ -162,12 +162,22 @@
 					<h:panelGrid id="taskPanelGrid" columns="2"
 						rendered="#{taskBean.task ne null}">
 						<p:outputLabel value="Título: " for="title" />
-						<p:inputText class="title" id="title"
+						<p:inputText class="title" id="title" maxlength="120"
 							value="#{taskBean.task.title}" />
 
 						<p:outputLabel value="Descrição: " for="description" />
-						<p:inputText class="title" id="description" rows="1"
-							autoResize="true" value="#{taskBean.task.description}" />
+						<p:inputTextarea styleClass="title description-cell"
+							counter="display" counterTemplate="{0} Caracteres restantes."
+							id="description" rows="3" cols="6" maxlength="120"
+							autoResize="true" value="#{taskBean.task.description}">
+						</p:inputTextarea>
+						<div
+							style="display: flex; justify-content: flex-end;">
+							<h:outputText id="display" class="block" />
+						</div>
+					</h:panelGrid>
+					<h:panelGrid style="display: flex; justify-content: center;"
+						columns="4" rendered="#{taskBean.task ne null}">
 						<p:outputLabel value="Prioridade: " for="priority" />
 						<p:selectOneMenu id="priority" value="#{taskBean.task.priority}">
 							<f:selectItem itemLabel="Selecione" />
@@ -187,12 +197,13 @@
 						<p:calendar pattern="dd/MM/yyyy" size="30" id="deadline"
 							showTime="false" value="#{taskBean.task.deadline}" />
 						<h:outputLabel />
-						<p:commandButton id="saveCommandButton" value="Salvar"
-							actionListener="#{taskBean.save}"
-							update=":form:tasksDataTable taskPanelGrid taskMessages"
-							oncomplete="if (!args.validationFailed) PF('taskDialogWidgetVar').hide()"
-							styleClass="ui-button-success" process="createTaskDialog" />
+
 					</h:panelGrid>
+					<p:commandButton id="saveCommandButton" value="Salvar"
+						actionListener="#{taskBean.save}"
+						update=":form:tasksDataTable taskPanelGrid taskMessages"
+						oncomplete="if (!args.validationFailed) PF('taskDialogWidgetVar').hide()"
+						styleClass="ui-button-success" process="createTaskDialog" />
 				</p:dialog>
 
 				<p:confirmDialog widgetVar="deleteTaskDialog" showEffect="fade"
